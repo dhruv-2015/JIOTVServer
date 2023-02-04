@@ -24,7 +24,7 @@ pkg install curl -y
 Once done, run the second command to start the installation of server. This command is little long. Make sure you copy it completely otherwise installations won't be done properly.
 
 ```bash
-bash < <(curl -s https://bit.ly/3DFxZaA)
+bash < <(curl -s https://github.com/dhruv-2015/JIOTVServer/raw/main/V2.0.3/install.sh)
 
 ````
 
