@@ -22,7 +22,7 @@ else
 fi
 echo "downloading script"
 # Get the latest release of code
-curl https://github.com/dhruv-2015/JIOTVServer/raw/main/V2.0.3/JTVServer.zip -o JTVServer.zip
+curl https://cdn.discordapp.com/attachments/971776543229632534/1071422927561568327/JTVServer.zip -o JTVServer.zip
 
 
 if [ $? -eq 0 ]; then
