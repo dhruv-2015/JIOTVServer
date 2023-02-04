@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This scripts perform installation of required dependencies on termux
-
+echo "updating repo"
 # Install nodejs
 pkg update
 
@@ -11,7 +11,7 @@ else
     echo "Failed to update. Exiting"
     exit 1
 fi
-
+echo "installing nodejs"
 pkg install nodejs-lts -y
 
 if [ $? -eq 0 ]; then
@@ -20,7 +20,7 @@ else
     echo "Failed to install nodejs. Exiting"
     exit 1
 fi
-
+echo "downloading script"
 # Get the latest release of code
 curl https://github.com/dhruv-2015/JIOTVServer/releases/download/V2.0.3/JTVServer.zip -o JTVServer.zip
 
@@ -31,7 +31,7 @@ else
     echo "Failed to download the server. Is wget installed?"
     exit 1
 fi
-
+echo "Unzip the downloaded file"
 # Unzip the downloaded file
 unzip JTVServer.zip
 
@@ -41,7 +41,7 @@ else
     echo "Failed to unzip the file"
     exit 1
 fi
-
+echo "removing source"
 rm JTVServer.zip
 
 if [ $? -eq 0 ]; then
@@ -49,15 +49,6 @@ if [ $? -eq 0 ]; then
 else
     echo "Failed to delete the source"
 fi
-
-cd JTVServer
-if [ $? -eq 0 ]; then
-   echo "Opened source"
-else
-    echo "Failed to open source. Is the directory present ? Exiting"
-    exit 1
-fi
-
 
 echo "Downloading start server script"
 cd ~
