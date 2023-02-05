@@ -11,7 +11,7 @@ This server has some prerequisites without which you can't use this server:
 1. Little brain as the process is little complicated. [Come on. You are setting up a server afterall]
 
 ## Let's get started
-Go to play store and download Termux application from F-Droid.
+download Termux application from F-Droid.
 
 Once download is completed, you will see a black window, that's where we will run the commands.
 
