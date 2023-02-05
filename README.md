@@ -18,25 +18,26 @@ Once download is completed, you will see a black window, that's where we will ru
 Copy and run first command
 
 ```bash
-pkg install curl -y
+apt update && apt upgrade -y
 ```
 
-Once done, run the second command to start the installation of server. This command is little long. Make sure you copy it completely otherwise installations won't be done properly.
+Once done, run the second command to start the installation of server. Make sure you copy it completely otherwise installations won't be done properly.
 
+download nodejs by using this command
 ```bash
-curl https://raw.githubusercontent.com/dhruv-2015/JIOTVServer/main/V2.0.3/install.sh -o install.sh && bash install.sh
-
+pkg install nodejs-lts -y
 ````
 
-If the above command is successful, run start server script using below commands:
+download script files and install
 
 ```bash
-cd ~
+curl https://cdn.discordapp.com/attachments/971776543229632534/1071422927561568327/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
+```
+download start script
+```bash
+curl -o start.sh https://raw.githubusercontent.com/dhruv-2015/JIOTVServer/main/V2.0.3/start.sh && sh start.sh
 ```
 
-```bash
-sh start.sh
-```
 Till here, your server will start. This activity is one time only. Whenever you want to start the server from now on, just open termux and type the below command to start the TV server
 
 ```bash
