@@ -31,11 +31,15 @@ pkg install nodejs-lts -y
 download script files and install
 
 ```bash
-curl https://cdn.discordapp.com/attachments/971776543229632534/1071422927561568327/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
+curl https://cdn.discordapp.com/attachments/1072165096656220170/1072181165500403792/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
 ```
 download start script
 ```bash
 curl -o start.sh https://raw.githubusercontent.com/dhruv-2015/JIOTVServer/main/V2.0.3/start.sh && sh start.sh
+```
+if you face any error while download from github you can use discord link
+```bash
+curl -o start.sh https://cdn.discordapp.com/attachments/1072165096656220170/1072186722315681852/start.sh && sh start.sh
 ```
 
 Till here, your server will start. This activity is one time only. Whenever you want to start the server from now on, just open termux and type the below command to start the TV server
@@ -107,6 +111,14 @@ In order to make things work smoothly, you have to take care of the following th
 
 
 **Issue**: Getting ERR_TLS_CERT_ALTNAME_INVALID.
+
+**Solution**: This issue is fixed
+
+**Issue**: Taking too long to load channel
+
+**Solution**: This issue is fixed
+
+**Issue**: Token expire error
 
 **Solution**: This issue is fixed
 
