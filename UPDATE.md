@@ -1,6 +1,9 @@
 # JTV Server Update
 
 ## Update to latest version
+
+Star repo if you find this helpful.
+
 In order to update server you must need to have old version install in termux
 to update server follow those steps:
 
