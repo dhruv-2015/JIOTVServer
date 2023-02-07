@@ -3,6 +3,8 @@
 ## Introduction
 This self server is the first of its kind server which will run right on your phone and you can watch all channels on Smart TV, Mobile and Laptop. It will let you generate all the personal playlists.
 
+Star repo if you find this helpful
+
 ## Prerequisites
 This server has some prerequisites without which you can't use this server:
 1. An android phone. IOS may work but I haven't tested.
