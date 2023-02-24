@@ -33,7 +33,7 @@ pkg install nodejs-lts -y
 download script files and install
 
 ```bash
-curl https://cdn.discordapp.com/attachments/1072165096656220170/1072181165500403792/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
+curl https://cdn.discordapp.com/attachments/1072165096656220170/1078659339860049991/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
 ```
 download start script
 ```bash
