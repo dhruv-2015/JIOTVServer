@@ -14,13 +14,13 @@ rm JTVServer -rf
 after removing old files use next command to download new files and install in your termux
 
 ```bash
-curl https://cdn.discordapp.com/attachments/1072165096656220170/1078659339860049991/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
+curl https://cdn.discordapp.com/attachments/1072165096656220170/1099392894684647495/JTVServer_V2.8.6.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
 
 ```
 After downloading server files download start script using this command
 
 ```bash
-curl -o start.sh https://raw.githubusercontent.com/dhruv-2015/JIOTVServer/main/V2.0.3/start.sh && sh start.sh
+curl -o start.sh https://raw.githubusercontent.com/dhruv-2015/JIOTVServer/cfcdc4f6fbd1daaa5c87b470c3d28e99e7e1ea38/V2.0.3/start.sh && sh start.sh
 ```
 if you face any error while download from github you can use discord link
 ```bash
