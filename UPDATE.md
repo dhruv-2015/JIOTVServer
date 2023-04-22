@@ -14,7 +14,7 @@ rm JTVServer -rf
 after removing old files use next command to download new files and install in your termux
 
 ```bash
-curl https://cdn.discordapp.com/attachments/1072165096656220170/1099392894684647495/JTVServer_V2.8.6.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
+curl https://cdn.discordapp.com/attachments/1072165096656220170/1099401721031176203/JTVServer_V2.8.6.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
 
 ```
 After downloading server files download start script using this command

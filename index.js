@@ -27,12 +27,19 @@ if (!fs.existsSync("channel-catchup.db")) {
   fs["writeFileSync"]("./channel-catchup.db", '{"channel": {}}');
 }
 
-app.get("/login", (req, res) => {
+app.get("/login.html", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 })
 
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
 app.get("/admin", (req, res) => {
-  res.sendFile(path.join( __dirname,  "public", "login.html"));
+  res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+app.get("/admin.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
 app.use(cors());
