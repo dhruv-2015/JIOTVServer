@@ -15,7 +15,8 @@ const __dirname = path.dirname(__filename);
 
 
 
-import { handler } from "file://D:/projects/JTVServer github/WEB/build/handler.js";
+import { handler } from "./build/handler.js";
+// import { handler } from "file://D:/projects/JTVServer github/WEB/build/handler.js";
 
 
 if (!fs.existsSync("channel.db")) {
