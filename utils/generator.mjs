@@ -140,7 +140,7 @@ async function getLiveM3u8(url, cookie) {
       },
     };
     let response = await fetch(
-      `https://smumcdnems01.cdnsrv.jio.com${url}`,
+      `https:/${url}`,
       options
     );
     let baseurl = url.split("/");

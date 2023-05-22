@@ -1,9 +1,9 @@
 {
   "name": "jtvserver",
-  "version": "2.8.6",
+  "version": "2.9.3",
   "description": "jiotv server to live tv in the web or in any device",
   "main": "index.js",
-  "type" :"module",
+  "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "sh start.sh"

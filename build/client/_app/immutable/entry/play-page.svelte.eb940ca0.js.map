@@ -1,0 +1,1 @@
+{"version":3,"file":"play-page.svelte.eb940ca0.js","sources":["../../../../../../src/routes/play/+page.svelte"],"sourcesContent":["<script>\r\n\t\r\nimport { browser } from '$app/environment';\r\nif (browser) {\r\n    window.location.href = '/';\r\n}\r\n</script>\r\n"],"names":[],"mappings":"4EAII,cAAO,SAAS,KAAO"}

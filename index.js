@@ -15,7 +15,6 @@ const __dirname = path.dirname(__filename);
 
 
 
-import { handler } from "./build/handler.js";
 // import { handler } from "file://D:/projects/JTVServer github/WEB/build/handler.js";
 
 
@@ -58,16 +57,17 @@ app.use("/catchup", catchulRoute);
 
 
 // app.use(express.static(path.join(__dirname, "public")));
+import { handler } from "./build/handler.js";
 
 app.use(handler);
 
 app.listen(PORT, () => {
-    console.log("===================================================================");
-    console.log(chalk.green("THIS SERVER IS 100% FREE. PLEASE DON'T PAY ANYONE."));
-    console.log(chalk.green("STRICT ACTION WILL BE TAKEN AGAINST THOSE WHO ARE SELLING THIS."));
-    console.log(chalk.green("IF ANYONE TRYING TO SELL IT, PLEASE REPORT IT ON OUR DISCORD SERVER\nhttps://discord.gg/suyzkCQKhC"));
-    console.log(chalk.green("Please Stare Repo https://github.com/dhruv-2015/JIOTVServer"));
-    console.log(chalk.green("VERSION 2.8.6"));
+  console.log("===================================================================");
+  console.log(chalk.green("THIS SERVER IS 100% FREE. PLEASE DON'T PAY ANYONE."));
+  console.log(chalk.green("STRICT ACTION WILL BE TAKEN AGAINST THOSE WHO ARE SELLING THIS."));
+  console.log(chalk.green("IF ANYONE TRYING TO SELL IT, PLEASE REPORT IT ON OUR DISCORD SERVER\nhttps://discord.gg/suyzkCQKhC"));
+  console.log(chalk.green("Please Stare Repo https://github.com/dhruv-2015/JIOTVServer"));
+  console.log(chalk.green("VERSION 2.8.6"));
     console.log(chalk.green("980+ CHANNELS AVAILABLE. MORE FEATURES WILL COME SOON. STAY TUNED"));
     console.log("===================================================================");
     console.log(chalk.red("       __ ____ ____     ______ _    __ \n      / //  _// __ \\   /_  __/| |  / / \n __  / / / / / / / /    / /   | | / /  \n/ /_/ /_/ / / /_/ /    / /    | |/ /   \n\\____//___/ \\____/    /_/     |___/    \n                                "));
