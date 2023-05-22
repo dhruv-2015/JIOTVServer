@@ -14,7 +14,7 @@ rm JTVServer -rf
 after removing old files use next command to download new files and install in your termux
 
 ```bash
-wget https://github.com/dhruv-2015/JIOTVServer/releases/download/V2.9.3/JTVServer.zip -o JTVServer.zip && unzip JTVServer.zip && rm JTVServer.zip
+wget https://github.com/dhruv-2015/JIOTVServer/releases/download/V2.9.3/JTVServer.zip -N && unzip JTVServer.zip && rm JTVServer.zip
 
 ```
 After downloading server files download start script using this command
