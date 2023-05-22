@@ -27,7 +27,7 @@ Once done, run the second command to start the installation of server. Make sure
 
 download nodejs by using this command
 ```bash
-pkg install nodejs-lts -y
+pkg install nodejs-lts wget -y
 ````
 
 download script files and install
