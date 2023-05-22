@@ -104,7 +104,6 @@ router.get("/getkey", async (req, res) => {
   };
   try {
     let r = await fetch(url, options);
-    console.log(await r.buffer());
     return res
       .status(r.status)
       .send(r.status == 200 ? await r.buffer() : await r.text());
