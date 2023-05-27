@@ -1,4 +1,4 @@
-FROM node:16.3.0-alpine
+FROM node:16
 
 # Copy app to /src
 COPY . /src
@@ -9,6 +9,8 @@ ENV PORT=3500
 
 EXPOSE ${PORT}
 
-ENTRYPOINT ["sh", "start.sh"]
+RUN npm install -g pm2
 
-CMD ["sh", "start.sh"]
+RUN npm install
+
+CMD ["pm2-runtime", "start", "index.js"]
