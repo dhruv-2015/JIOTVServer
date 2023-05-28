@@ -7,6 +7,7 @@ app.use(express.urlencoded({ extended: true}));
 import fs from 'fs';
 app.use(express.json());
 const PORT = process.env.PORT || 3500;
+const HOST = process.env.HOST || "0.0.0.0"
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -61,7 +62,7 @@ import { handler } from "./build/handler.js";
 
 app.use(handler);
 
-app.listen(PORT, () => {
+app.listen(PORT,HOST, () => {
   console.log("===================================================================");
   console.log(chalk.green("THIS SERVER IS 100% FREE. PLEASE DON'T PAY ANYONE."));
   console.log(chalk.green("STRICT ACTION WILL BE TAKEN AGAINST THOSE WHO ARE SELLING THIS."));
@@ -73,7 +74,7 @@ app.listen(PORT, () => {
     console.log(chalk.red("       __ ____ ____     ______ _    __ \n      / //  _// __ \\   /_  __/| |  / / \n __  / / / / / / / /    / /   | | / /  \n/ /_/ /_/ / / /_/ /    / /    | |/ /   \n\\____//___/ \\____/    /_/     |___/    \n                                "));
     console.log("===================================================================");
     console.log(`TV server is running on port ${PORT}`);
-    console.log(`Please open http://localhost:${PORT}/login to login and get playlist if running server for the first time`);
+    console.log(`Please open http://${HOST}:${PORT}/login to login and get playlist if running server for the first time`);
     // console.log(chalk.red("need to login every 24 hours even if you are already logged in"));
     console.log("If facing any errors, please login from portal again");
     console.log("you can use server m3u8 links in other websites and apps");
