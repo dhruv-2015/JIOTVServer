@@ -2,6 +2,12 @@ version: "3"
 services:
   jiotvserver:
     image: ghcr.io/anshuman852/jiotvserver:main
+    environment:
+      PORT: 3500
+      HOST: 0.0.0.0
+      AUTH_ENABLED: "true"
+      AUTH_USER: admin
+      AUTH_PASS: password
     network_mode: host
     volumes:
       - jiotvserver:/data

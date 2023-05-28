@@ -1,11 +1,27 @@
 import express from "express";
 import cors from "cors";
+import expressBasicAuth from "express-basic-auth";
 // require("dotenv")["config"]();
 import chalk from "chalk";
 const app = express();
 app.use(express.urlencoded({ extended: true}));
+const AUTH_USER= process.env.AUTH_USER || "admin";
+const AUTH_PASS= process.env.AUTH_PASS || "password";
+var AUTH_ENABLED= process.env.AUTH_ENABLED || "false";
+if (AUTH_ENABLED.toLowerCase() == "true") {
+  AUTH_ENABLED = true;
+} else {
+  AUTH_ENABLED = false;
+}
 import fs from 'fs';
 app.use(express.json());
+if (AUTH_ENABLED){
+app.use(expressBasicAuth({
+  users: { [AUTH_USER]: AUTH_PASS },
+  challenge: true,
+  })
+);}
+
 const PORT = process.env.PORT || 3500;
 const HOST = process.env.HOST || "0.0.0.0"
 import path from "path";
