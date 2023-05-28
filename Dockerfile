@@ -12,8 +12,8 @@ ENV PORT=3500 \
 
 EXPOSE ${PORT}
 
-RUN npm install -g pm2
+RUN npm install -g pm2 yarn
 
-RUN npm install
+RUN yarn install
 
 CMD ["pm2-runtime", "start", "index.js"]
