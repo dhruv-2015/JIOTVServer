@@ -12,7 +12,10 @@ router.post("/ip", (req, res) => {
 });
 
 router.get("/ip", async (req, res) => {
-  // console.log(req.originalUrl);
+  const host = req.get("host");
+  const protocol = req.protocol;
+  const BASE_URL = `${protocol}://${host}`;
+  console.log(req.originalUrl);
   if (req.query.type == "getServerIp" && req.query.auth == "141204") {
     let ipData = await fetch("http://ip-api.com/json");
     return res.send(await ipData.json());
@@ -24,7 +27,7 @@ router.get("/ip", async (req, res) => {
       flag: "r",
     });
   } else {
-    ipdata = "127.0.0.1";
+    ipdata = BASE_URL;
   }
   res.status(200).send({ ip: ipdata, port: port });
 });

@@ -11,6 +11,11 @@ const PORT = process.env.PORT || 3500;
 const pwd=process.cwd();
 router.get("/playlist", async (req, res) => {
   res.contentType("application/vnd.apple.mpegurl");
+  // get current hostname
+  const host = req.get("host");
+  // get http or https
+  const protocol = req.protocol;
+  const BASE_URL = `${protocol}://${host}`;
   let ip;
   if (fs["existsSync"]("ipData.jiotv")) {
     ip = fs["readFileSync"]("ipData.jiotv", {
@@ -20,12 +25,18 @@ router.get("/playlist", async (req, res) => {
   } else {
     ip = "127.0.0.1";
   }
-  const playlistData = await playlist(`${ip}:${PORT}`);
+  const playlistData = await playlist(BASE_URL);
   res.status(200).send(playlistData);
 });
 
 router.get("/playlist/download", async (req, res) => {
   res.contentType("application/vnd.apple.mpegurl");
+  // get current hostname
+  const host = req.get("host");
+  // get http or https
+  const protocol = req.protocol;
+  // print full url
+  const BASE_URL = `${protocol}://${host}`;
   res.setHeader(
     "Content-Disposition",
     "attachment; filename=" + "playlist.m3u8"
@@ -40,7 +51,7 @@ router.get("/playlist/download", async (req, res) => {
     ip = "127.0.0.1";
   }
 
-  const playlistData = await playlist(`${ip}:${PORT}`);
+  const playlistData = await playlist(BASE_URL);
   res.status(200).send(playlistData);
 });
 
