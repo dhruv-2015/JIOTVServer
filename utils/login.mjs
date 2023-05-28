@@ -51,7 +51,7 @@ export async function login(mobile, otp) {
         if (r.status == 400) {
           return { success: false, message: data.message };
         }
-        fs["writeFileSync"]("./tokenData.jiotv", JSON["stringify"](data));
+        fs["writeFileSync"](process.cwd()+"/data/tokenData.jiotv", JSON["stringify"](data));
         return { success: true, message: "login success" };
     } catch (error) {
         return { success: false, message: error.message };

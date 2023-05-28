@@ -4,15 +4,14 @@ import fs from "fs";
 
 import refreshtoken from "../refreshToken.mjs";
 import cookieManager from "./cookieManager.mjs";
+import { getUserToken } from "../getUserToken.js";
 
 async function getUrl(id, start, end, retry = 0) {
   try {
     if (retry > 5) {
       return "";
     }
-    let userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-    );
+    let userDataJiotv = getUserToken();
     var options = {
       method: "POST",
       headers: {
@@ -66,9 +65,7 @@ export async function genM3u8(id, start, end) {
         data: "channelUrl",
       };;
     }
-    const userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-    );
+    const userDataJiotv = getUserToken();
     var options = {
       method: "GET",
       headers: {
@@ -127,9 +124,7 @@ async function getMasterM3u8(id, start, end) {
 
 async function getLiveM3u8(url, vbegin, vend, cookie) {
   try {
-    const userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-    );
+    const userDataJiotv = getUserToken();
     var options = {
       method: "GET",
       headers: {

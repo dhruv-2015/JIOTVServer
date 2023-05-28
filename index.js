@@ -17,15 +17,15 @@ const __dirname = path.dirname(__filename);
 
 
 // import { handler } from "file://D:/projects/JTVServer github/WEB/build/handler.js";
-
-
-if (!fs.existsSync("channel.db")) {
-  fs["writeFileSync"]("./channel.db", '{"channel": {}}');
+const pwd=process.cwd();
+console.log(pwd);
+if (!fs.existsSync(pwd+"/data/channel.db")) {
+  fs["writeFileSync"](pwd+"/data/channel.db", '{"channel": {}}');
+}
+if (!fs.existsSync(pwd+"/data/channel-catchup.db")) {
+  fs["writeFileSync"](pwd+"/data/channel-catchup.db", '{"channel": {}}');
 }
 
-if (!fs.existsSync("channel-catchup.db")) {
-  fs["writeFileSync"]("./channel-catchup.db", '{"channel": {}}');
-}
 
 app.get("/login.html", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));

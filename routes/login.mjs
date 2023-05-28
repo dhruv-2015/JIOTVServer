@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import fs from "fs";
 import { sendOtp, login } from "../utils/login.mjs";
-
+const pwd = process.cwd();
 router.post("/login", async (req, res) => {
   const { mobile, otp } = req.body;
   // console.log(req.body);
@@ -31,7 +31,7 @@ router.get("/login", (req, res) => {
 });
 
 router.get("/isLogin", (req, res) => {
-  fs["existsSync"]("tokenData.jiotv")
+  fs["existsSync"](pwd+"/data/tokenData.jiotv")
     ? res.status(200)["send"]({ success: !![], result: !![] })
     : res.status(200)["send"]({ success: !![], result: ![] });
 });

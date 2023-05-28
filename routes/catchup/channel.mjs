@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 import chalk from "chalk";
 import httpProxy from "http-proxy";
 const apiProxy = httpProxy["createProxyServer"]();
-
+import { getUserToken } from "../../utils/getUserToken.js";
 import { getCookie } from "../../utils/catchup/cookieManager.mjs";
 
 import {
@@ -57,9 +57,7 @@ router.get("/getts/:start/:end/:id", async (req, res) => {
       await genM3u8(id);
       return res.redirect(req.originalUrl);
     }
-    const userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-    );
+    const userDataJiotv = getUserToken();
 
     let options = {
       method: "GET",
@@ -106,9 +104,7 @@ router.get("/getkey/:start/:end/:id", async (req, res) => {
     await genM3u8(id, start, end);
     return res.redirect(req.originalUrl);
   }
-  const userDataJiotv = JSON["parse"](
-    fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-  );
+  const userDataJiotv = getUserToken();
   let url = `https://tv.media.jio.com${key}`;
 
   let options = {

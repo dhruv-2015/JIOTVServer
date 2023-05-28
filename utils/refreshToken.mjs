@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import fs from "fs";
+import { getUserToken } from "./getUserToken.js";
 var options = {
   method: "POST",
   headers: {
@@ -17,9 +18,7 @@ var options = {
 
 export default async function genNewAccessToken() {
   try {
-    let userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-    );
+    let userDataJiotv = getUserToken();
     options["body"] = JSON.stringify({
       appName: "RJIL_JioTV",
       deviceId: "3c6d6b5702fa09bd",

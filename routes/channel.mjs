@@ -3,7 +3,7 @@ const router = express.Router();
 import fs from "fs";
 import fetch from "node-fetch";
 import chalk from "chalk";
-
+import { getUserToken } from "../utils/getUserToken.js";
 import { getCookie, getAll } from "../utils/cookieManager.mjs";
 
 import { getManifist, getM3u8, genM3u8 } from "../utils/generator.mjs";
@@ -73,9 +73,7 @@ router.get("/getkey", async (req, res) => {
     await genM3u8(id);
     return res.redirect(req.originalUrl);
   }
-  let userDataJiotv = JSON["parse"](
-    fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
-  );
+  let userDataJiotv = getUserToken();
   let url = `https://tv.media.jio.com/${key}`;
 
   let options = {

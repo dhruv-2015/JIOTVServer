@@ -8,7 +8,7 @@ import playlist from "../utils/genPlaylist.mjs";
 
 import jsonPlaylist from "../utils/getJsonPlaylist.mjs";
 const PORT = process.env.PORT || 3500;
-
+const pwd=process.cwd();
 router.get("/playlist", async (req, res) => {
   res.contentType("application/vnd.apple.mpegurl");
   let ip;
@@ -64,7 +64,7 @@ router.get("/updateplaylist", async (req, res) => {
     options
   );
   response = await response.json();
-  fs["writeFileSync"]("./channels.jiotv", JSON.stringify(response));
+  fs["writeFileSync"](pwd+"/data/channels.jiotv", JSON.stringify(response));
   res.status(200).send(response);
 });
 

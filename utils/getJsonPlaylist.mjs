@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import fs from "fs";
-
+const pwd = process.cwd();
 export default async function genPlaylist() {
   try {
     let file;
@@ -11,9 +11,9 @@ export default async function genPlaylist() {
         "User-Agent": "plaYtv/7.0.8 (Linux;Android 7.1.2) ExoPlayerLib/2.11.7",
       },
     };
-    if (fs["existsSync"]("channels.jiotv")) {
+    if (fs["existsSync"](pwd+"/data/channels.jiotv")) {
       file = JSON.parse(
-        fs["readFileSync"]("channels.jiotv", { encoding: "utf8", flag: "r" })
+        fs["readFileSync"](pwd+"/data/channels.jiotv", { encoding: "utf8", flag: "r" })
       );
     } else {
       let req = await fetch(
@@ -23,7 +23,7 @@ export default async function genPlaylist() {
       let response = JSON.parse(await req.text());
       response["genrateDate"] = new Date().getTime();
       file = response;
-      fs["writeFileSync"]("./channels.jiotv", JSON.stringify(response));
+      fs["writeFileSync"](pwd+"/data/channels.jiotv", JSON.stringify(response));
     }
     if (new Date().getTime() - file["genrateDate"] > 21600000) {
       // 6 hours
@@ -33,7 +33,7 @@ export default async function genPlaylist() {
       );
       let response = JSON.parse(await req.text());
       response["genrateDate"] = new Date().getTime();
-      fs["writeFileSync"]("./channels.jiotv", JSON.stringify(response));
+      fs["writeFileSync"](pwd+"/data/channels.jiotv", JSON.stringify(response));
     }
     return file;
   } catch (error) {

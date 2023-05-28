@@ -1,8 +1,8 @@
 import { JsonDB }from "node-json-db";
 import { Config }from "node-json-db/dist/lib/JsonDBConfig.js";
 import fs from 'fs';
-
-const db = new JsonDB(new Config("channel-catchup.db", true, false, "/"));
+const pwd=process.cwd();
+const db = new JsonDB(new Config(pwd+"/data/channel-catchup.db", true, false, "/"));
 
 // function init() {
 //   if (condition) {
