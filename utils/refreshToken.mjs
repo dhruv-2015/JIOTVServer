@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import fs from "fs";
 import { getUserToken } from "./getUserToken.js";
+const pwd = process.cwd();
 var options = {
   method: "POST",
   headers: {
@@ -32,7 +33,7 @@ export default async function genNewAccessToken() {
     if (res["authToken"]) {
       userDataJiotv["authToken"] = res.authToken;
       fs["writeFileSync"](
-        "./tokenData.jiotv",
+        pwd+"/data/tokenData.jiotv",
         JSON["stringify"](userDataJiotv)
       );
     } else {
