@@ -12,7 +12,7 @@ ENV PORT=3500 \
 
 EXPOSE ${PORT}
 
-RUN npm install -g pm2 yarn
+RUN yarn global add pm2
 
 RUN yarn install
 
