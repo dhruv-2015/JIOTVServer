@@ -1,0 +1,9 @@
+version: "3"
+services:
+  jiotvserver:
+    image: ghcr.io/anshuman852/jiotvserver:main
+    network_mode: host
+    volumes:
+      - jiotvserver:/data
+volumes:
+  jiotvserver:
