@@ -3,7 +3,7 @@ import playlist from './getJsonPlaylist.mjs';
 export default async function genPlaylist(url) {
   try {
     
-    let m3u8PlaylistFile = "#EXTM3U  x-tvg-url=\"https://github.com/mitthu786/tvepg/raw/main/epg.xml.gz\"\x0a";
+    let m3u8PlaylistFile = "#EXTM3U  x-tvg-url=\"https://github.com/arnab8820/JioTV-epg/raw/main/epg.xml.gz\"\x0a";
     const genreMap = {
       8: "Sports",
       5: "Entertainment",
@@ -19,16 +19,42 @@ export default async function genPlaylist(url) {
       18: "Shopping",
       19: "JioDarshan",
     };
+
+    const langMap = {
+      6: "English",
+      1: "Hindi",
+      2: "Marathi",
+      3: "Punjabi",
+      4: "Urdu",
+      5: "Bengali",
+      7: "Malayalam",
+      8: "Tamil",
+      9: "Gujarati",
+      10: "Odia",
+      11: "Telugu",
+      12: "Bhojpuri",
+      13: "Kannada",
+      14: "Assamese",
+      15: "Nepali",
+      16: "French"
+    };
+
     // fs
     let response = await playlist();
     
     const ServerUrl = `http://${url}`;
     for (let resData of response["result"]) {
         const channel_name = resData["channel_name"];
+        const channel_number = resData["channel_id"];
         const channelLogoUrl = "https://jiotv.catchup.cdn.jio.com/dare_images/images/" + resData["logoUrl"];
         const channelCategory = genreMap[resData["channelCategoryId"]];
+        const channelLanguage = langMap[resData["channelLanguageId"]];
         const logoUrl = resData['logoUrl'].split(".")[0];
-        (m3u8PlaylistFile += "#EXTINF:1\x20tvg-logo=\x22" + channelLogoUrl + "\x22\x20group-title=\x22" + channelCategory + "\x22," + channel_name + "\x20\x0a");
+        m3u8PlaylistFile += `#EXTINF:-1 tvg-chno="${channel_number}" tvg-name="${channel_name}" tvg-logo="${channelLogoUrl}" tvg-language="${channelLanguage}" tvg-type="${channelCategory}" group-title="${channelCategory}"`;
+        if (resData["isCatchupAvailable"]) {
+          m3u8PlaylistFile += ` catchup="vod" catchup-source="${ServerUrl}/catchup/getm3u8/\${start}/\${end}/${channel_number}/index.m3u8" catchup-days="7"`;
+        }
+        m3u8PlaylistFile += `, ${channel_name}\x20\x0a`;
         (m3u8PlaylistFile += ServerUrl + "/getm3u8/" + resData["channel_id"] + "/master.m3u8" + "\x0a");
     }
       m3u8PlaylistFile += `#EXTINF:-1 tvg-logo="http://jiotv.catchup.cdn.jio.com/dare_images/images/Sony_HD.png" group-title="Sony Liv",SONY HD
@@ -81,5 +107,4 @@ https://dai.google.com/linear/hls/event/j-YEIDwORxubtP_967VcZg/master.m3u8`;
     return "";
   }
 }
-
 
