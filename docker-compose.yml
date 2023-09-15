@@ -1,0 +1,8 @@
+version: "3"
+services:
+  jtvserver:
+    container_name: jtvserver
+    ports:
+      - 3500:3500
+    build: .
+    restart: unless-stopped

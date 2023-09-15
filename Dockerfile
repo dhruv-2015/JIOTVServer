@@ -1,6 +1,5 @@
-FROM node:16.3.0-alpine
+FROM node:18.3.0-alpine
 
-# Copy app to /src
 COPY . /src
 
 WORKDIR /src
