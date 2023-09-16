@@ -1,33 +1,32 @@
 import express from "express";
-import fs from "fs";
 import fetch from "node-fetch";
+import os from "node:os";
 const router = express.Router();
-const port = process.env.PORT || 3500;
+const AUTH_KEY = process.env.AUTH_KEY || "141204";
 
-router.post("/ip", (req, res) => {
-  if (req.body.ip == "") return res.redirect("admin.html?error=ip not dound");
-  let ip = req.body.ip;
-  fs["writeFileSync"]("./ipData.jiotv", ip);
-  res.redirect("login.html?ipset=" + ip);
-});
+router.get("/debug-ip", async (req, res) => {
+  if (req.query.auth === AUTH_KEY) {
+    let ipDataRes = await fetch("http://ip-api.com/json");
+    let ipDataServer = await ipDataRes.json();
 
-router.get("/ip", async (req, res) => {
-  // console.log(req.originalUrl);
-  if (req.query.type == "getServerIp" && req.query.auth == "141204") {
-    let ipData = await fetch("http://ip-api.com/json");
-    return res.send(await ipData.json());
-  }
-  let ipdata;
-  if (fs["existsSync"]("ipData.jiotv")) {
-    ipdata = fs["readFileSync"]("ipData.jiotv", {
-      encoding: "utf8",
-      flag: "r",
-    });
+    let networkInterfaces = os.networkInterfaces();
+    let ip = networkInterfaces["eth0"][0]["address"];
+    res
+      .type("json")
+      .send(
+        JSON.stringify(
+          {
+            localIP: ip,
+            ipDataServer: ipDataServer,
+            networkInterfaces: networkInterfaces,
+          },
+          null,
+          2
+        )
+      );
   } else {
-    ipdata = "127.0.0.1";
+    res.sendStatus(400);
   }
-  res.status(200).send({ ip: ipdata, port: port });
 });
-
 
 export default router;
