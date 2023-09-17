@@ -38,7 +38,7 @@ async function setCookie(id, cookie, masterUrl, start, end, masterM3u8) {
 
 export async function getCookie(id, start, end) {
   let data = await db.getData("/channel");
-  jdebug('file', __filename, 'data[`${id}-${start}-${end}`]', data[`${id}-${start}-${end}`]);
+  jdebug('data[`${id}-${start}-${end}`]', data[`${id}-${start}-${end}`]);
   if (data[`${id}-${start}-${end}`] != undefined) {
     let velidTime = 60 * 60 * 20 * 1000;
     if (Date.now() - new Date(data[`${id}-${start}-${end}`]["genrateTime"]) > velidTime) {

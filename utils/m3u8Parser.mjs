@@ -10,7 +10,7 @@ import jdebug from '../utils/debug.mjs';
 export default function parseM3u8(url, Playlist, id) {
   let baseurl = url.split("?");
   baseurl = baseurl[0];
-  jdebug('file', __filename, 'baseurl', baseurl);
+  jdebug('baseurl', baseurl);
   baseurl = url.split("/");
     baseurl.pop();
     baseurl = baseurl.join("/");
@@ -20,7 +20,7 @@ export default function parseM3u8(url, Playlist, id) {
     parser.end();
 
     let m3u8Playlist = Playlist;
-    jdebug('file', __filename, 'parser.manifest', JSON.stringify(parser.manifest));
+    jdebug('parser.manifest', JSON.stringify(parser.manifest));
     // obj["dd"] != undefined;
     if (parser.manifest.mediaGroups !== undefined) {
       let audioGroupe = parser.manifest.mediaGroups.AUDIO;
@@ -39,7 +39,7 @@ export default function parseM3u8(url, Playlist, id) {
 
       audioGroupe = parser.manifest.mediaGroups.SUBTITLES;
       for (let AUDIO in audioGroupe) {
-        jdebug('file', __filename, 'audioGroupe[AUDIO]', audioGroupe[AUDIO]);
+        jdebug('audioGroupe[AUDIO]', audioGroupe[AUDIO]);
         for (let audiogroupe in audioGroupe[AUDIO]) {
           console.log(audioGroupe[AUDIO][audiogroupe]);
           try {

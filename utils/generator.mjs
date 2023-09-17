@@ -44,7 +44,7 @@ async function getUrl(id, retry = 0) {
     if (response.status == 419) {
       // AuthToken Expire so gen new
       let ref = await refreshtoken();
-      jdebug('file', __filename, 'ref', ref);
+      jdebug('ref', ref);
       if (ref.success) {
         console.log(ref.message);
         getUrl(id, retry + 1);
@@ -178,15 +178,15 @@ async function getLiveM3u8(url, cookie) {
 
 export async function getM3u8(url, id) {
   let resss = await cookieManager.getCookie(id);
-  jdebug('file', __filename, "resss: ", resss["success"]);
-  jdebug('file', __filename, "resss: ", resss["data"]);
+  jdebug("resss: ", resss["success"]);
+  jdebug("resss: ", resss["data"]);
   if (resss.success == false) {
     await genM3u8(id);
     return "newGen";
   }
 
   let livem3u = await getLiveM3u8(url, resss.data);
-  jdebug('file', __filename, "livem3u: ", livem3u['m3u8']);
+  jdebug("livem3u: ", livem3u['m3u8']);
   if (livem3u.success) {
         return m3u8Parser(url, livem3u.m3u8, id);
     } else {

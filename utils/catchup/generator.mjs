@@ -44,7 +44,7 @@ async function getUrl(id, start, end, retry = 0) {
     if (response.status == 419) {
       // AuthToken Expire so gen new
       let ref = await refreshtoken();
-      jdebug('file', __filename, 'ref', ref);
+      jdebug('ref', ref);
       if (ref.success) {
         console.log(ref.message);
         getUrl(id, start, end, retry + 1);
@@ -66,7 +66,7 @@ async function getUrl(id, start, end, retry = 0) {
 export async function genM3u8(id, start, end) {
   try {
     let channelUrl = await getUrl(id, start, end);
-    jdebug('file', __filename, 'channelUrl', channelUrl);
+    jdebug('channelUrl', channelUrl);
     if (channelUrl == "") {
       return {
         success: false,
@@ -186,19 +186,19 @@ async function getLiveM3u8(url, vbegin, vend, cookie) {
 
 export async function getM3u8(id, start, end, m3u8, vbegin, vend) {
   let resss = await cookieManager.getCookie(id, start, end);
-  jdebug('file', __filename, "resss: ", resss["success"]);
-  jdebug('file', __filename, "resss: ", resss["data"]);
+  jdebug("resss: ", resss["success"]);
+  jdebug("resss: ", resss["data"]);
   if (resss.success == false) {
     await genM3u8(id, start, end);
     return "newGen";
   }
 
   let livem3u = await getLiveM3u8(m3u8, vbegin, vend, resss.data);
-  jdebug('file', __filename, "livem3u: ", livem3u['m3u8']);
+  jdebug("livem3u: ", livem3u['m3u8']);
   if (livem3u.success) {
     // let temptime = Date.now();
     return m3u8Parser(m3u8, livem3u.m3u8, id, start, end);
-    jdebug('file', __filename, (new Date() - temptime) / 1000);
+    jdebug((new Date() - temptime) / 1000);
   } else {
     await genM3u8(id);
     return "newGen";

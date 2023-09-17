@@ -24,7 +24,7 @@ import {
 router.get("/getm3u8/:start/:end/:id/index.m3u8", async (req, res) => {
   const { id, start, end } = req.params;
   let decryptionData = await getManifist(id, start, end);
-  jdebug('file', __filename, 'decryptionData', decryptionData);
+  jdebug('decryptionData', decryptionData);
   if (!decryptionData["success"]) {
     return res.redirect(req.originalUrl);
   }
@@ -35,7 +35,7 @@ router.get("/getm3u8/:start/:end/:id/index.m3u8", async (req, res) => {
 router.get("/getm3u8/:start/:end/:id/master.m3u8", async (req, res) => {
   const { id, start, end } = req.params;
   let decryptionData = await getManifist(id, start, end);
-  jdebug('file', __filename, 'decryptionData', decryptionData);
+  jdebug('decryptionData', decryptionData);
   if (!decryptionData["success"]) {
     return res.redirect(req.originalUrl);
   }
@@ -47,7 +47,7 @@ router.get("/getm3u8/:start/:end/:id", async (req, res) => {
   const { id, start, end } = req.params;
   const { m3u8, vbegin, vend } = req.query;
   let decryptionData = await getM3u8(id, start, end, m3u8, vbegin, vend);
-  jdebug('file', __filename, 'decryptionData', decryptionData);
+  jdebug('decryptionData', decryptionData);
   if (decryptionData == "newGen") {
     return res.redirect(req.oiginalUrl);
   }

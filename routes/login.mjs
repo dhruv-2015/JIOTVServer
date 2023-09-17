@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 router.post("/login", async (req, res) => {
   const { mobile, otp } = req.body;
-  jdebug('file', __filename, req.body);
+  jdebug(req.body);
   if (mobile != "" && otp == "") {
     let response = await sendOtp(mobile);
     if (response.success) {

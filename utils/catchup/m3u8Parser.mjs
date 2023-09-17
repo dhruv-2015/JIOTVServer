@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 function parseM3u8(url, Playlist, id, start, end) {
   let baseurl = url.split("?");
   baseurl = baseurl[0];
-  jdebug('file', __filename, 'baseurl', baseurl);
+  jdebug('baseurl', baseurl);
   baseurl = url.split("/");
   baseurl.pop();
   baseurl = baseurl.join("/");
@@ -40,7 +40,7 @@ function parseM3u8(url, Playlist, id, start, end) {
     });
   }
   parser.manifest.segments.forEach((segment) => {
-    jdebug('file', __filename, 'segment.uri', segment.uri);
+    jdebug('segment.uri', segment.uri);
     m3u8Playlist = m3u8Playlist.replace(
       segment.uri,
       `/catchup/getts/${start}/${end}/${id}?ts=${baseurl}/${segment.uri}`
