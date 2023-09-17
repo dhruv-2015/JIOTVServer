@@ -3,7 +3,14 @@ import m3u8Parser from "./m3u8Parser.mjs";
 import fs from "fs";
 import refreshtoken from "./refreshToken.mjs";
 
+import jdebug from '../utils/debug.mjs';
+
 import cookieManager from "./cookieManager.mjs"
+
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function getUrl(id, retry = 0) {
   try {
@@ -37,7 +44,7 @@ async function getUrl(id, retry = 0) {
     if (response.status == 419) {
       // AuthToken Expire so gen new
       let ref = await refreshtoken();
-      // console.log(ref);
+      jdebug('file', __filename, 'ref', ref);
       if (ref.success) {
         console.log(ref.message);
         getUrl(id, retry + 1);
@@ -171,15 +178,15 @@ async function getLiveM3u8(url, cookie) {
 
 export async function getM3u8(url, id) {
   let resss = await cookieManager.getCookie(id);
-  // console.log("resss: " + resss["success"]);
-  // console.log("resss: " + resss["data"]);
+  jdebug('file', __filename, "resss: ", resss["success"]);
+  jdebug('file', __filename, "resss: ", resss["data"]);
   if (resss.success == false) {
     await genM3u8(id);
     return "newGen";
   }
 
   let livem3u = await getLiveM3u8(url, resss.data);
-  // console.log("livem3u: " + livem3u['m3u8']);
+  jdebug('file', __filename, "livem3u: ", livem3u['m3u8']);
   if (livem3u.success) {
         return m3u8Parser(url, livem3u.m3u8, id);
     } else {

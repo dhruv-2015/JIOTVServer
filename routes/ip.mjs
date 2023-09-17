@@ -2,10 +2,10 @@ import express from "express";
 import fetch from "node-fetch";
 import os from "node:os";
 const router = express.Router();
-const AUTH_KEY = process.env.AUTH_KEY || "141204";
+const isDebug = process.env.DHRUV_JTV_DEBUG === "true";
 
-router.get("/debug-ip", async (req, res) => {
-  if (req.query.auth === AUTH_KEY) {
+router.get("/debug", async (req, res) => {
+  if (isDebug) {
     let ipDataRes = await fetch("http://ip-api.com/json");
     let ipDataServer = await ipDataRes.json();
 

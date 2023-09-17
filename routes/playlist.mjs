@@ -2,12 +2,13 @@ import express from "express";
 const router = express.Router();
 import fetch from "node-fetch";
 import fs from "fs";
+import 'dotenv/config';
 import playlist from "../utils/genPlaylist.mjs";
 
 
 
 import jsonPlaylist from "../utils/getJsonPlaylist.mjs";
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.DHRUV_JTV_PORT || 3500;
 
 router.get("/playlist", async (req, res) => {
   res.contentType("application/vnd.apple.mpegurl");

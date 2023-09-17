@@ -2,6 +2,13 @@ import { JsonDB }from "node-json-db";
 import { Config }from "node-json-db/dist/lib/JsonDBConfig.js";
 import fs from 'fs';
 
+import jdebug from '../../utils/debug.mjs';
+
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const db = new JsonDB(new Config("channel-catchup.db", true, false, "/"));
 
 // function init() {
@@ -31,7 +38,7 @@ async function setCookie(id, cookie, masterUrl, start, end, masterM3u8) {
 
 export async function getCookie(id, start, end) {
   let data = await db.getData("/channel");
-  // console.log(data[`${id}-${start}-${end}`]);
+  jdebug('file', __filename, 'data[`${id}-${start}-${end}`]', data[`${id}-${start}-${end}`]);
   if (data[`${id}-${start}-${end}`] != undefined) {
     let velidTime = 60 * 60 * 20 * 1000;
     if (Date.now() - new Date(data[`${id}-${start}-${end}`]["genrateTime"]) > velidTime) {
