@@ -3,9 +3,16 @@ const router = express.Router();
 import fs from "fs";
 import { sendOtp, login } from "../utils/login.mjs";
 
+import jdebug from '../utils/debug.mjs';
+
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 router.post("/login", async (req, res) => {
   const { mobile, otp } = req.body;
-  // console.log(req.body);
+  jdebug(req.body);
   if (mobile != "" && otp == "") {
     let response = await sendOtp(mobile);
     if (response.success) {

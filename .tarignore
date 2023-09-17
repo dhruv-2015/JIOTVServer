@@ -1,0 +1,21 @@
+# Some wildcard patterns are not working, had to give full filename
+*.jiotv
+channels.jiotv
+ipData.jiotv
+*.db
+channel-catchup.db
+channel.db
+*.code-workspace
+node_modules/object-inspect/test*
+node_modules/has-symbols/test*
+node_modules/url-toolkit/test*
+node_modules/min-document/test*
+node_modules/@videojs/vhs-utils/test*
+node_modules/m3u8-parser/test*
+WEB*
+.github*
+.git*
+.gitignore
+.tarignore
+start.bat
+start.sh

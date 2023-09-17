@@ -2,8 +2,15 @@ import fetch from "node-fetch";
 import m3u8Parser from "./m3u8Parser.mjs";
 import fs from "fs";
 
+import jdebug from '../../utils/debug.mjs';
+
 import refreshtoken from "../refreshToken.mjs";
 import cookieManager from "./cookieManager.mjs";
+
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function getUrl(id, start, end, retry = 0) {
   try {
@@ -37,7 +44,7 @@ async function getUrl(id, start, end, retry = 0) {
     if (response.status == 419) {
       // AuthToken Expire so gen new
       let ref = await refreshtoken();
-      // console.log(ref);
+      jdebug('ref', ref);
       if (ref.success) {
         console.log(ref.message);
         getUrl(id, start, end, retry + 1);
@@ -59,7 +66,7 @@ async function getUrl(id, start, end, retry = 0) {
 export async function genM3u8(id, start, end) {
   try {
     let channelUrl = await getUrl(id, start, end);
-    // console.log(channelUrl);
+    jdebug('channelUrl', channelUrl);
     if (channelUrl == "") {
       return {
         success: false,
@@ -179,19 +186,19 @@ async function getLiveM3u8(url, vbegin, vend, cookie) {
 
 export async function getM3u8(id, start, end, m3u8, vbegin, vend) {
   let resss = await cookieManager.getCookie(id, start, end);
-  // console.log("resss: " + resss["success"]);
-  // console.log("resss: " + resss["data"]);
+  jdebug("resss: ", resss["success"]);
+  jdebug("resss: ", resss["data"]);
   if (resss.success == false) {
     await genM3u8(id, start, end);
     return "newGen";
   }
 
   let livem3u = await getLiveM3u8(m3u8, vbegin, vend, resss.data);
-  // console.log("livem3u: " + livem3u['m3u8']);
+  jdebug("livem3u: ", livem3u['m3u8']);
   if (livem3u.success) {
     // let temptime = Date.now();
     return m3u8Parser(m3u8, livem3u.m3u8, id, start, end);
-    // console.log((new Date() - temptime) / 1000);
+    jdebug((new Date() - temptime) / 1000);
   } else {
     await genM3u8(id);
     return "newGen";
