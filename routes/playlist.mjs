@@ -12,16 +12,7 @@ const PORT = process.env.DHRUV_JTV_PORT || 3500;
 
 router.get("/playlist", async (req, res) => {
   res.contentType("application/vnd.apple.mpegurl");
-  let ip;
-  if (fs["existsSync"]("ipData.jiotv")) {
-    ip = fs["readFileSync"]("ipData.jiotv", {
-      encoding: "utf8",
-      flag: "r",
-    });
-  } else {
-    ip = "127.0.0.1";
-  }
-  const playlistData = await playlist(`${ip}:${PORT}`);
+  const playlistData = await playlist(req.protocol + '://' + req.get('host') );
   res.status(200).send(playlistData);
 });
 
@@ -31,23 +22,12 @@ router.get("/playlist/download", async (req, res) => {
     "Content-Disposition",
     "attachment; filename=" + "playlist.m3u8"
   );
-  let ip;
-  if (fs["existsSync"]("ipData.jiotv")) {
-    ip = fs["readFileSync"]("ipData.jiotv", {
-      encoding: "utf8",
-      flag: "r",
-    });
-  } else {
-    ip = "127.0.0.1";
-  }
-
-  const playlistData = await playlist(`${ip}:${PORT}`);
+  const playlistData = await playlist(req.protocol + '://' + req.get('host') );
   res.status(200).send(playlistData);
 });
 
 router.get("/playlist/json", async (req, res) => {
   res.set("Cache-control", "public, max-age=" + 60 * 60 * 2);
-
   res.status(200).send(await jsonPlaylist());
 });
 
