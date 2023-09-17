@@ -58,6 +58,9 @@ app.use("/", playlistRoute);
 app.use("/catchup", catchulRoute);
 
 // app.use(express.static(path.join(__dirname, "public")));
+app.get("/favicon.ico", (req, res) => {
+  return res.sendFile(path.join(__dirname + "/public/favicon.ico"));
+});
 import { handler } from "./build/handler.js";
 
 app.use(handler);
