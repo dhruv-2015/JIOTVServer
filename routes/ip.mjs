@@ -10,13 +10,13 @@ router.get("/debug", async (req, res) => {
     let ipDataServer = await ipDataRes.json();
 
     let networkInterfaces = os.networkInterfaces();
-    let ip = networkInterfaces["eth0"][0]["address"];
+    // let ip = networkInterfaces["eth0"][0]["address"];
     res
       .type("json")
       .send(
         JSON.stringify(
           {
-            localIP: ip,
+            // localIP: ip,
             ipDataServer: ipDataServer,
             networkInterfaces: networkInterfaces,
           },

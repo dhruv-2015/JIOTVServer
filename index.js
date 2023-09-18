@@ -16,9 +16,9 @@ const __dirname = path.dirname(__filename);
 
 // import { handler } from "file://D:/projects/JTVServer github/WEB/build/handler.js";
 
-let networkInterfaces = os.networkInterfaces();
-let ip = networkInterfaces["eth0"][0]["address"];
-fs["writeFileSync"]("./ipData.jiotv", ip);
+// let networkInterfaces = os.networkInterfaces();
+// let ip = networkInterfaces["eth0"][0]["address"];
+// fs["writeFileSync"]("./ipData.jiotv", ip);
 
 if (!fs.existsSync("channel.db")) {
   fs["writeFileSync"]("./channel.db", '{"channel": {}}');
