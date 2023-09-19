@@ -107,9 +107,6 @@ app.listen(PORT, "0.0.0.0", () => {
     `Please open http://localhost:${PORT}/login from the host to login and get playlist if running server for the first time`
   );
   console.log(
-    `Or, please open http://${ip}:${PORT}/login from any machine on the LAN to login and get playlist if running server for the first time`
-  );
-  console.log(
     `Note: If hosted in a website, you may want to use the domain or its IP`
   );
   // console.log(chalk.red("need to login every 24 hours even if you are already logged in"));
