@@ -10,7 +10,6 @@
 <link rel="icon"
         href="https://jiotv.catchup.cdn.jio.com/dare_images/images/{channel.logoUrl}">
 <div class="container">
-	<!-- <a href="/catchup/{id}" class="m-4 font-medium flex items-center title-font mb-4 text-gray-900"> <img class="inline-block mr-2" src="/back.svg" alt=""> {channel['channel_name']} </a> -->
     <div class="">
         <div class="md:w-[80%]">
             <Player channel={channel} id={id} cstart={cstart} cend={cend}></Player>

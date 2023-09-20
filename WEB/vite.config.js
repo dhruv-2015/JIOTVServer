@@ -10,7 +10,9 @@ export default defineConfig({
 			'/getts': 'http://localhost:3500',
 			'/catchup/getm3u8': 'http://localhost:3500',
 			'/catchup/getkey': 'http://localhost:3500',
-			'/catchup/getts': 'http://localhost:3500'
+			'/catchup/getts': 'http://localhost:3500',
+			'/login': 'http://localhost:3500',
+			'/ip': 'http://localhost:3500'
 		}
 	},
 	plugins: [sveltekit()],

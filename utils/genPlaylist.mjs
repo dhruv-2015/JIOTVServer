@@ -42,7 +42,7 @@ export default async function genPlaylist(url) {
     // fs
     let response = await playlist();
 
-    const ServerUrl = `http://${url}`;
+    const ServerUrl = `${url}`;
     for (let resData of response["result"]) {
       const channel_name = resData["channel_name"];
       const channel_number = resData["channel_id"];
