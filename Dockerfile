@@ -4,6 +4,8 @@ COPY . /src
 
 WORKDIR /src
 
+RUN npm i
+
 ENV PORT=3500
 
 EXPOSE ${PORT}
