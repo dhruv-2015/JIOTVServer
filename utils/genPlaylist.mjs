@@ -3,7 +3,8 @@ import playlist from "./getJsonPlaylist.mjs";
 export default async function genPlaylist(url) {
   try {
     let m3u8PlaylistFile =
-      '#EXTM3U  x-tvg-url="https://tobalan.github.io/epg.xml.gz"\x0a';
+      //Adding epg 
+      '#EXTM3U  x-tvg-url="https://avkb.short.gy/jioepg.xml.gz"\x0a';
     const genreMap = {
       8: "Sports",
       5: "Entertainment",
