@@ -14,11 +14,11 @@ const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
-// import { handler } from "file://D:/projects/JTVServer github/WEB/build/handler.js";
-
-// let networkInterfaces = os.networkInterfaces();
-// let ip = networkInterfaces["eth0"][0]["address"];
-// fs["writeFileSync"]("./.jiotv/ipData.jiotv", ip);
+ 
+if (!fs.existsSync("./.jiotv")) {
+  //fs["writeFileSync"]("./.jiotv/channel.db", '{"channel": {}}');
+  fs.mkdirSync(path.join(__dirname, "./.jiotv"));
+}  
 
 if (!fs.existsSync("./.jiotv/channel.db")) {
   fs["writeFileSync"]("./.jiotv/channel.db", '{"channel": {}}');
