@@ -65,7 +65,7 @@ router.get("/getts/:start/:end/:id", async (req, res) => {
       return res.redirect(req.originalUrl);
     }
     const userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+      fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
     );
 
     let options = {
@@ -114,7 +114,7 @@ router.get("/getkey/:start/:end/:id", async (req, res) => {
     return res.redirect(req.originalUrl);
   }
   const userDataJiotv = JSON["parse"](
-    fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+    fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
   );
   let url = `https://tv.media.jio.com${key}`;
 

@@ -19,3 +19,4 @@ WEB*
 .tarignore
 start.bat
 start.sh
+.jiotv

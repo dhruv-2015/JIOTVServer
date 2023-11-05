@@ -3,7 +3,7 @@ import fs from "fs";
 export default async function genNewAccessToken() {
   try {
     let userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+      fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
     );
     let options = {
       method: "POST",
@@ -33,7 +33,7 @@ export default async function genNewAccessToken() {
     if (res["authToken"]) {
       userDataJiotv["authToken"] = res.authToken;
       fs["writeFileSync"](
-        "./tokenData.jiotv",
+        "./.jiotv/tokenData.jiotv",
         JSON["stringify"](userDataJiotv)
       );
     } else {

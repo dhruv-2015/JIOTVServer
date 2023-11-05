@@ -18,7 +18,7 @@ async function getUrl(id, retry = 0) {
       return "";
     }
     let userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+      fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
     );
     var options = {
       method: "POST",
@@ -72,7 +72,7 @@ export async function genM3u8(id) {
       };
     }
     const userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+      fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
     );
     var options = {
       method: "GET",
@@ -123,7 +123,7 @@ export let getManifist = async function getMasterM3u8(id) {
 async function getLiveM3u8(url, cookie) {
   try {
     const userDataJiotv = JSON["parse"](
-      fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+      fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
     );
     var options = {
       method: "GET",

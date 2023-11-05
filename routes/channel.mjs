@@ -74,7 +74,7 @@ router.get("/getkey", async (req, res) => {
     return res.redirect(req.originalUrl);
   }
   let userDataJiotv = JSON["parse"](
-    fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
+    fs["readFileSync"]("./.jiotv/tokenData.jiotv", { encoding: "utf8", flag: "r" })
   );
   let url = `https://tv.media.jio.com/${key}`;
 

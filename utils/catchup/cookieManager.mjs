@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const db = new JsonDB(new Config("channel-catchup.db", true, false, "/"));
+const db = new JsonDB(new Config("./.jiotv/channel-catchup.db", true, false, "/"));
 
 // function init() {
 //   if (condition) {

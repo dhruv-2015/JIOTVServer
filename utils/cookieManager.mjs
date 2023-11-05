@@ -2,7 +2,7 @@ import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
 import fs from 'fs';
 
-const db = new JsonDB(new Config("channel.db", true, false, "/"));
+const db = new JsonDB(new Config("./.jiotv/channel.db", true, false, "/"));
 
 export async function setCookie(id, cookie, masterUrl, masterM3u8) {
     let uri = masterUrl.split("?");
