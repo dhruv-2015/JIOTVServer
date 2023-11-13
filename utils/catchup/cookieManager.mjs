@@ -70,6 +70,7 @@ async function getUrl(id, start, end) {
 }
 
 async function getM3u8(id, start, end) {
+  console.log("getM3u8", id, start, end);
   let data = await db.getData("/channel") || {};
     
     if (data[`${id}-${start}-${end}`] != undefined) {
