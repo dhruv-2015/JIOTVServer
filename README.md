@@ -1,4 +1,4 @@
-# J-TV self server
+# jiotvarr
 
 ## Introduction
 
