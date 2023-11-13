@@ -5,7 +5,6 @@ import fetch from "node-fetch";
 import chalk from "chalk";
 import httpProxy from "http-proxy";
 const apiProxy = httpProxy["createProxyServer"]();
-
 import jdebug from '../../utils/debug.mjs';
 
 import path from "path";
@@ -46,6 +45,7 @@ router.get("/getm3u8/:start/:end/:id/master.m3u8", async (req, res) => {
 router.get("/getm3u8/:start/:end/:id", async (req, res) => {
   const { id, start, end } = req.params;
   const { m3u8, vbegin, vend } = req.query;
+  // const programId = await getProgramId(id, start, end)
   let decryptionData = await getM3u8(id, start, end, m3u8, vbegin, vend);
   jdebug('decryptionData', decryptionData);
   if (decryptionData == "newGen") {

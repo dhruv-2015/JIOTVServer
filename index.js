@@ -7,7 +7,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 import fs from "fs";
 app.use(express.json());
-const PORT = process.env.DHRUV_JTV_PORT || 3500;
+// const PORT = process.env.DHRUV_JTV_PORT || 3500;
+const PORT = process.env.PORT || 3500;
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
@@ -65,7 +66,15 @@ import { handler } from "./build/handler.js";
 
 app.use(handler);
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, "0.0.0.0", async () => {
+  let r
+  try {
+    r = await fetch("https://api.github.com/repos/dhruv-2015/JIOTVServer/releases/latest");
+    r = await r.json();
+    r = r['tag_name']
+  } catch (error) {
+    
+  }
   console.log(
     "==================================================================="
   );
@@ -85,7 +94,10 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(
     chalk.green("Please Stare Repo https://github.com/dhruv-2015/JIOTVServer")
   );
-  console.log(chalk.green("VERSION 2.8.6"));
+  if (r) {
+    // console.log(chalk.green("VERSION 2.8.6"));
+    console.log(chalk.green(`VERSION ${r}`));
+  }
   console.log(
     chalk.green(
       "980+ CHANNELS AVAILABLE. MORE FEATURES WILL COME SOON. STAY TUNED"
