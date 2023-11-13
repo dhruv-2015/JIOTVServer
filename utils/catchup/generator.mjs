@@ -12,7 +12,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function getUrl(id, start, end, retry = 0) {
+async function getUrl(id, programId, start, end, retry = 0) {
   try {
     if (retry > 5) {
       return "";
@@ -20,6 +20,7 @@ async function getUrl(id, start, end, retry = 0) {
     let userDataJiotv = JSON["parse"](
       fs["readFileSync"]("tokenData.jiotv", { encoding: "utf8", flag: "r" })
     );
+    let srno = getTtimme(start).split("T")[0];
     var options = {
       method: "POST",
       headers: {
@@ -35,25 +36,28 @@ async function getUrl(id, start, end, retry = 0) {
         "Accept-Encoding": "gzip",
         "User-Agent": "okhttp/4.2.2",
       },
-      body: `stream_type=Catchup&channel_id=${id}&begin=${start}&end=${end}`,
+      body: `stream_type=Catchup&channel_id=${id}&programId=${programId}&showtime=1000000000000&srno=${srno}&begin=${getTtimme(start)}&end=${getTtimme(end)}`,
+      // body: `stream_type=Catchup&channel_id=${id}&programId=231110144020&showtime=1000000000000&srno=20231110&begin=1699736400000&end=1699738200000`
     };
     let response = await fetch(
       "https://jiotvapi.media.jio.com/playback/apis/v1/geturl?langId=6",
       options
     );
+    console.log("response", response);
     if (response.status == 419) {
       // AuthToken Expire so gen new
       let ref = await refreshtoken();
       jdebug('ref', ref);
       if (ref.success) {
         console.log(ref.message);
-        getUrl(id, start, end, retry + 1);
+        getUrl(id,programId, start, end, retry + 1);
       } else {
         console.log(ref.message);
         return "";
       }
     }
     let data = JSON.parse(await response.text());
+    console.log(data);
     return data["result"]; // http://jiotvcod.cdn.jio.com/bpk-tv/Colors_HD_MOB/Catchup_Fallback/index.m3u8?begin=1678126680&end=1678561200&__hdnea__=st=1678611147~exp=1678614747~acl=/bpk-tv/Colors_HD_MOB/Catchup_Fallback/*~hmac=a094a407bd00d3e37aeddd63d4abc549748a93b6bb83553bf33d9f476042f061
   } catch (e) {
     console.log(e.message);
@@ -62,10 +66,19 @@ async function getUrl(id, start, end, retry = 0) {
 }
 
 
+function getTtimme(ep) {
 
-export async function genM3u8(id, start, end) {
+  // The number "20231110T160000" appears to be in a timestamp format following the pattern "YYYYMMDDTHHMMSS." In this case, it represents November 10, 2023, at 4:00:00 PM (16:00:00) in 24-hour time.
+  let d = new Date(ep);
+  let str = `${d.getFullYear()}${d.getMonth()}${d.getDate()}T${d.getHours()}${d.getMinutes()}${d.getSeconds()}`
+  return str;
+  
+}
+
+
+export async function genM3u8(id, programId, start, end) {
   try {
-    let channelUrl = await getUrl(id, start, end);
+    let channelUrl = await getUrl(id, programId, start, end);
     jdebug('channelUrl', channelUrl);
     if (channelUrl == "") {
       return {
@@ -124,10 +137,10 @@ export async function genM3u8(id, start, end) {
 }
 
 
-async function getMasterM3u8(id, start, end) {
+async function getMasterM3u8(id, programId, start, end) {
   let m3u8 = await cookieManager.getM3u8(id, start, end);
     if (!m3u8.success) {
-        return await genM3u8(id, start, end);
+        return await genM3u8(id, programId, start, end);
     }
     return m3u8;
 }
