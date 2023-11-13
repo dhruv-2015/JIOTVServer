@@ -5,7 +5,6 @@ import fetch from "node-fetch";
 import chalk from "chalk";
 import httpProxy from "http-proxy";
 const apiProxy = httpProxy["createProxyServer"]();
-import getProgramId from "../../utils/catchup/getProgramId.js";
 import jdebug from '../../utils/debug.mjs';
 
 import path from "path";
@@ -23,9 +22,7 @@ import {
 
 router.get("/getm3u8/:start/:end/:id/index.m3u8", async (req, res) => {
   const { id, start, end } = req.params;
-  const programId = await getProgramId(id, start, end);
-  console.log("programId", programId);
-  let decryptionData = await getManifist(id, programId, start, end);
+  let decryptionData = await getManifist(id, start, end);
   jdebug('decryptionData', decryptionData);
   if (!decryptionData["success"]) {
     return res.redirect(req.originalUrl);
@@ -36,9 +33,7 @@ router.get("/getm3u8/:start/:end/:id/index.m3u8", async (req, res) => {
 // master.m3u8
 router.get("/getm3u8/:start/:end/:id/master.m3u8", async (req, res) => {
   const { id, start, end } = req.params;
-  console.log("programId", programId);
-  let decryptionData = await getManifist(id, programId, start, end);
-  const programId = await getProgramId(id, start, end)
+  let decryptionData = await getManifist(id, start, end);
   jdebug('decryptionData', decryptionData);
   if (!decryptionData["success"]) {
     return res.redirect(req.originalUrl);
