@@ -3,14 +3,14 @@
 	import { createSearchStore, searchHandler } from '$lib/stores/search';
 	export let data;
 	import { onDestroy } from 'svelte';
-	const genreMap = { 8: 'Sports', 5: 'Entertainment', 6: 'Movies', 12: 'News', 13: 'Music', 7: 'Kids', 9: 'Lifestyle', 10: 'Infotainment', 15: 'Devotional', 0x10: 'Business', 17: 'Educational', 18: 'Shopping', 19: 'JioDarshan'};
-	const lenMap = { 6: 'English', 1: 'Hindi', 2: 'Marathi', 3: 'Punjabi', 4: 'Urdu', 5: 'Bengali', 7: 'Malayalam', 8: 'Tamil', 9: 'Gujarati', 10: 'Odia', 11: 'Telugu', 12: 'Bhojpuri', 13: 'Kannada', 14: 'Assamese', 15: 'Nepali', 16: 'French'};
+	const categoryMap = { 8: 'Sports', 5: 'Entertainment', 6: 'Movies', 12: 'News', 13: 'Music', 7: 'Kids', 9: 'Lifestyle', 10: 'Infotainment', 15: 'Devotional', 0x10: 'Business', 17: 'Educational', 18: 'Shopping', 19: 'JioDarshan'};
+	const langMap = { 6: 'English', 1: 'Hindi', 2: 'Marathi', 3: 'Punjabi', 4: 'Urdu', 5: 'Bengali', 7: 'Malayalam', 8: 'Tamil', 9: 'Gujarati', 10: 'Odia', 11: 'Telugu', 12: 'Bhojpuri', 13: 'Kannada', 14: 'Assamese', 15: 'Nepali', 16: 'French'};
 
 	const searchProducts = data.result.map((e) => ({
 		...e,
 		searchTerms: `${e.channelCategoryId} ${e.channel_id} ${e.channel_name} ${
-			genreMap[e.channelCategoryId]
-		} ${lenMap[e.channelLanguageId]}`
+			categoryMap[e.channelCategoryId]
+		} ${langMap[e.channelLanguageId]} ${e.isHD ? 'HD' : 'SD'}`
 	}));
 	const searchStore = createSearchStore(searchProducts);
 	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
