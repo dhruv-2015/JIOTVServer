@@ -15,8 +15,8 @@ export const createSearchStore = ( data ) => {
 }
 
 export const searchHandler =( store ) => {
-	const searchTerm = store.search.toLowerCase() || ""
+	const searchTerms = store.search.toLowerCase().split(' ') || [];
 	store.filtered = store.data.filter((item) => {
-		return item.searchTerms.toLowerCase().includes(searchTerm)
-	})
+		return searchTerms.every(term => item.searchTerms.toLowerCase().includes(term));
+	});
 }
