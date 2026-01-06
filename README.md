@@ -1,3 +1,5 @@
+# ❗this project is no longer being maintained.
+
 # J-TV self server
 
 ## Introduction
